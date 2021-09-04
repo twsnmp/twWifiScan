@@ -8,4 +8,5 @@ require (
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.9 // indirect
 	golang.org/x/sys v0.0.0-20210902050250-f475640dd07b // indirect
+	golang.org/x/text v0.3.7
 )

@@ -69,13 +69,14 @@ func sendReport() int {
 			e.RSSI = ap.RSSI
 			e.Info = ap.Info
 			e.LastTime = time.Now().Unix()
+			syslogCh <- e.String()
 		} else {
 			ap.FirstTime = time.Now().Unix()
 			ap.LastTime = time.Now().Unix()
 			ap.Count = 1
 			apMap[ap.BSSID] = ap
-			syslogCh <- ap.String()
 			log.Println("new AP", ap.String())
+			syslogCh <- ap.String()
 		}
 	}
 	return len(list)
