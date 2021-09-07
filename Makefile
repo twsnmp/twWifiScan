@@ -30,10 +30,6 @@ zip: $(TARGETS)
 	cd dist && $(ZIP) twWifiScan_linux_amd64.zip twWifiScan
 	cd dist && $(ZIP) twWifiScan_linux_arm.zip twWifiScan.arm
 
-docker:  dist/twWifiScan Docker/Dockerfile
-	cp dist/twWifiScan Docker/
-	cd Docker && docker build -t twsnmp/twWifiScan .
-
 ### 実行ファイルのビルドルール
 $(DIST)/twWifiScan.exe: $(SRC) ./wifiCmd_windows.go
 	env GO111MODULE=on GOOS=windows GOARCH=amd64 $(GO_BUILD) $(GO_LDFLAGS) -o $@

@@ -18,7 +18,6 @@ var version = "v1.0.0"
 var commit = ""
 var syslogDst = ""
 var iface = "wlan0"
-var list = false
 var syslogInterval = 600
 var cpuprofile string
 var memprofile string
@@ -27,7 +26,6 @@ func init() {
 	flag.StringVar(&syslogDst, "syslog", "", "syslog destnation list")
 	flag.StringVar(&iface, "iface", "wlan0", "monitor interface")
 	flag.IntVar(&syslogInterval, "interval", 600, "syslog send interval(sec)")
-	flag.BoolVar(&list, "list", false, "list interface")
 	flag.StringVar(&cpuprofile, "cpuprofile", "", "write cpu profile to `file`")
 	flag.StringVar(&memprofile, "memprofile", "", "write memory profile to `file`")
 	flag.VisitAll(func(f *flag.Flag) {
@@ -71,10 +69,6 @@ func main() {
 		}
 	}
 	log.Printf("version=%s", fmt.Sprintf("%s(%s)", version, commit))
-	if list {
-		listIface()
-		return
-	}
 	if iface == "" {
 		log.Fatalln("no monitor interface")
 	}
@@ -92,7 +86,4 @@ func main() {
 	log.Println("quit by signal")
 	cancel()
 	time.Sleep(time.Second * 2)
-}
-
-func listIface() {
 }
