@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 )
 
@@ -59,6 +60,7 @@ func sendReport() int {
 		return 0
 	}
 	for _, ap := range list {
+		ap.BSSID = strings.ToUpper(ap.BSSID)
 		if e, ok := apMap[ap.BSSID]; ok {
 			e.Count++
 			if e.SSID != ap.SSID || e.Channel != ap.Channel || e.Info != ap.Info {
