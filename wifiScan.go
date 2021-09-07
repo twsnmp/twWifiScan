@@ -36,6 +36,7 @@ type wifiAPInfo struct {
 	RSSI      string
 	Channel   string
 	Info      string
+	Vendor    string
 	Count     int
 	Change    int
 	FirstTime int64
@@ -43,8 +44,9 @@ type wifiAPInfo struct {
 }
 
 func (e *wifiAPInfo) String() string {
-	return fmt.Sprintf("type=APInfo,ssid=%s,bssid=%s,rssi=%s,Channel=%s,info=%s,count=%d,change=%d,ft=%s,lt=%s",
+	return fmt.Sprintf("type=APInfo,ssid=%s,bssid=%s,rssi=%s,Channel=%s,info=%s,count=%d,change=%d,vendor=%s,ft=%s,lt=%s",
 		e.SSID, e.BSSID, e.RSSI, e.Channel, e.Info, e.Count, e.Change,
+		e.Vendor,
 		time.Unix(e.FirstTime, 0).Format(time.RFC3339),
 		time.Unix(e.LastTime, 0).Format(time.RFC3339),
 	)
@@ -61,6 +63,7 @@ func sendReport() int {
 	}
 	for _, ap := range list {
 		ap.BSSID = strings.ToUpper(ap.BSSID)
+		ap.Vendor = getVendorFromAddress(ap.BSSID)
 		if e, ok := apMap[ap.BSSID]; ok {
 			e.Count++
 			if e.SSID != ap.SSID || e.Channel != ap.Channel || e.Info != ap.Info {
