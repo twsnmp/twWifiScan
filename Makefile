@@ -13,7 +13,7 @@ ZIP          = zip
 
 ### ターゲットパラメータ
 DIST = dist
-SRC = ./main.go ./syslog.go ./monitor.go ./wifiScan.go
+SRC = ./main.go ./syslog.go ./monitor.go ./wifiScan.go ./vendor.go
 TARGETS     = $(DIST)/twWifiScan.exe $(DIST)/twWifiScan.app $(DIST)/twWifiScan $(DIST)/twWifiScan.arm
 GO_PKGROOT  = ./...
 
