@@ -18,7 +18,21 @@ func wifiScanCmd() ([]*wifiAPInfo, error) {
 		if len(fs) < 6 {
 			continue
 		}
-		rssi, errParse := strconv.Atoi(fs[2])
+		i := 1
+		for i < len(fs)-1 {
+			if strings.Contains(fs[i], ":") {
+				_, errParse := strconv.Atoi(fs[i+1])
+				if errParse == nil {
+					break
+				}
+			}
+			i++
+		}
+		if i >= len(fs)-1 {
+			continue
+		}
+		ssid := strings.Join(fs[0:i], " ")
+		rssi, errParse := strconv.Atoi(fs[i+1])
 		if errParse != nil {
 			continue
 		}
@@ -26,11 +40,11 @@ func wifiScanCmd() ([]*wifiAPInfo, error) {
 			continue
 		}
 		r = append(r, &wifiAPInfo{
-			SSID:    fs[0],
-			BSSID:   fs[1],
-			RSSI:    fs[2],
-			Channel: fs[3],
-			Info:    strings.Join(fs[4:], ";"),
+			SSID:    ssid,
+			BSSID:   fs[i],
+			RSSI:    fs[i+1],
+			Channel: fs[i+2],
+			Info:    strings.Join(fs[i+3:], ";"),
 		})
 	}
 	return r, nil
