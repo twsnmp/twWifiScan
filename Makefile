@@ -39,7 +39,7 @@ $(DIST)/twWifiScan.app: $(SRC) ./wifiCmd_darwin.go
 $(DIST)/twWifiScan.arm: $(SRC) ./wifiCmd_linux.go
 	env GO111MODULE=on GOOS=linux GOARCH=arm GOARM=7 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 $(DIST)/twWifiScan.arm64: $(SRC) ./wifiCmd_linux.go
-	env GO111MODULE=on GOOS=linux GOARCH=arm $(GO_BUILD) $(GO_LDFLAGS) -o $@
+	env GO111MODULE=on GOOS=linux GOARCH=arm64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 $(DIST)/twWifiScan: $(SRC) ./wifiCmd_linux.go
 	env GO111MODULE=on GOOS=linux GOARCH=amd64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 
