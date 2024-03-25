@@ -1,7 +1,7 @@
 .PHONY: all test clean zip mac
 
 ### バージョンの定義
-VERSION     := "v1.0.1"
+VERSION     := "v1.0.2"
 COMMIT      := $(shell git rev-parse --short HEAD)
 
 ### コマンドの定義
@@ -14,7 +14,7 @@ ZIP          = zip
 ### ターゲットパラメータ
 DIST = dist
 SRC = ./main.go ./syslog.go ./monitor.go ./wifiScan.go ./vendor.go
-TARGETS     = $(DIST)/twWifiScan.exe $(DIST)/twWifiScan.app $(DIST)/twWifiScan $(DIST)/twWifiScan.arm
+TARGETS     = $(DIST)/twWifiScan.exe $(DIST)/twWifiScan.app $(DIST)/twWifiScan $(DIST)/twWifiScan.arm $(DIST)/twWifiScan.arm64
 GO_PKGROOT  = ./...
 
 ### PHONY ターゲットのビルドルール
@@ -29,6 +29,7 @@ zip: $(TARGETS)
 	cd dist && $(ZIP) twWifiScan_mac.zip twWifiScan.app
 	cd dist && $(ZIP) twWifiScan_linux_amd64.zip twWifiScan
 	cd dist && $(ZIP) twWifiScan_linux_arm.zip twWifiScan.arm
+	cd dist && $(ZIP) twWifiScan_linux_arm64.zip twWifiScan.arm64
 
 ### 実行ファイルのビルドルール
 $(DIST)/twWifiScan.exe: $(SRC) ./wifiCmd_windows.go
@@ -37,6 +38,8 @@ $(DIST)/twWifiScan.app: $(SRC) ./wifiCmd_darwin.go
 	env GO111MODULE=on GOOS=darwin GOARCH=amd64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 $(DIST)/twWifiScan.arm: $(SRC) ./wifiCmd_linux.go
 	env GO111MODULE=on GOOS=linux GOARCH=arm GOARM=7 $(GO_BUILD) $(GO_LDFLAGS) -o $@
+$(DIST)/twWifiScan.arm64: $(SRC) ./wifiCmd_linux.go
+	env GO111MODULE=on GOOS=linux GOARCH=arm $(GO_BUILD) $(GO_LDFLAGS) -o $@
 $(DIST)/twWifiScan: $(SRC) ./wifiCmd_linux.go
 	env GO111MODULE=on GOOS=linux GOARCH=amd64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 
