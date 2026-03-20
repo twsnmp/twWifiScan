@@ -10,11 +10,11 @@ import (
 	"time"
 )
 
-var syslogCh chan string
 var syslogCount = 0
+var syslogCh = make(chan string, 2000)
 
 func startSyslog(ctx context.Context) {
-	syslogCh = make(chan string, 2000)
+	log.Println("start syslog")
 	dstList := strings.Split(syslogDst, ",")
 	dst := []net.Conn{}
 	for _, d := range dstList {
@@ -25,7 +25,7 @@ func startSyslog(ctx context.Context) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		syslogCh <- fmt.Sprintf("start send syslog to %s", d)
+		log.Printf("syslog dst %s", d)
 		dst = append(dst, s)
 	}
 	host, err := os.Hostname()
