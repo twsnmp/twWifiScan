@@ -21,7 +21,6 @@ builds:
     goos:
       - linux
       - windows
-      - darwin
     goarch:
       - amd64
       - arm64
@@ -49,4 +48,5 @@ release:
 
     ---
 
-    Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+    Released by [GoReleaser](https://github.com/goreleaser).
+

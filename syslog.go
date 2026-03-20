@@ -51,3 +51,13 @@ func startSyslog(ctx context.Context) {
 		}
 	}
 }
+
+func sendSyslog(msg string) {
+	select {
+	case syslogCh <- msg:
+	default:
+		if debug {
+			log.Println("syslog channel full, skipping message")
+		}
+	}
+}
