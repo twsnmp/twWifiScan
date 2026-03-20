@@ -6,6 +6,9 @@ Wifi AP sensor for TWSNMP FC
 
 [日本語の説明](./README_ja.md)
 
+![](images/twWifiScan.png)
+
+
 ## Overview
 
 twWifiScan is a sensor program that collects information on wireless LAN access points in the surrounding area and sends it to TWSNMP FC, etc., via syslog or MQTT.
@@ -15,6 +18,7 @@ In the current version, the following information can be obtained:
 - Statistical information on monitored packets
 - Sensor resource usage
 - Wireless LAN access point details (BSSID, SSID, RSSI, Channel, Encryption, etc.)
+
 
 ## Status
 

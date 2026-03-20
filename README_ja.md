@@ -6,6 +6,8 @@ TWSNMP FCのためのWifiアクセスポイントセンサーです。
 
 [English](./README.md)
 
+![](images/twWifiScan.png)
+
 ## 概要
 
 周辺にある無線LANのアクセスポイントの情報をTWSNMP FCなどへ、syslogまたはMQTTで送信するためのセンサープログラムです。
