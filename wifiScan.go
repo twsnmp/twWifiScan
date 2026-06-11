@@ -21,6 +21,7 @@ func startWifiScan(ctx context.Context) {
 				len(apMap), count, float64(count)/float64(interval), syslogCount, iface))
 			publishMQTT(&mqttWifiScanStatsDataEnt{
 				Time:      time.Now().Format(time.RFC3339),
+				Host:      hostName,
 				Total:     len(apMap),
 				Count:     count,
 				PS:        float64(count) / float64(interval),
@@ -86,6 +87,7 @@ func sendReport() int {
 			sendSyslog(e.String())
 			publishMQTT(&mqttApInfoDataEnt{
 				Time:      time.Now().Format(time.RFC3339),
+				Host:      hostName,
 				SSID:      e.SSID,
 				BSSID:     e.BSSID,
 				RSSI:      e.RSSI,
@@ -108,6 +110,7 @@ func sendReport() int {
 			sendSyslog(ap.String())
 			publishMQTT(&mqttApInfoDataEnt{
 				Time:      time.Now().Format(time.RFC3339),
+				Host:      hostName,
 				SSID:      ap.SSID,
 				BSSID:     ap.BSSID,
 				RSSI:      ap.RSSI,

@@ -56,6 +56,8 @@ $ make zip
 Usage of dist/twWifiScan:
   -debug
     	デバッグモードの有効化
+  -host string
+    	ホスト名(識別のための識別子)
   -iface string
     	モニタするインターフェース (デフォルト "wlan0")
   -interval int
@@ -100,9 +102,9 @@ type=APInfo,ssid=F660T-VFyM-X,bssid=FC:C8:97:B0:xx:D5,rssi=-73,Channel=1,info=En
 
 ### MQTT
 JSON 形式で送信されます。トピックは指定したプレフィックスに基づいて以下のようになります。
-- `<mqttTopic>/APInfo`
-- `<mqttTopic>/WifiScanStats`
-- `<mqttTopic>/Monitor`
+- `<mqttTopic>/APInfo/<bssid>`
+- `<mqttTopic>/WifiScanStats/<hostName>`
+- `<mqttTopic>/Monitor/<hostName>`
 
 ## ライセンス
 

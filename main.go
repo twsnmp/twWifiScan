@@ -24,6 +24,7 @@ var mqttPassword = ""
 var mqttClientID = ""
 var mqttTopic = ""
 var debug = false
+var hostName = ""
 
 func init() {
 	flag.StringVar(&syslogDst, "syslog", "", "syslog destnation list")
@@ -35,12 +36,20 @@ func init() {
 	flag.StringVar(&mqttClientID, "mqttClientID", "twWifiScan", "mqtt client id")
 	flag.StringVar(&mqttTopic, "mqttTopic", "twWifiScan", "mqtt topic prefix")
 	flag.BoolVar(&debug, "debug", false, "debug mode")
+	flag.StringVar(&hostName, "host", "", "host name for identification")
 	flag.VisitAll(func(f *flag.Flag) {
 		if s := os.Getenv("TWWIFISCAN_" + strings.ToUpper(f.Name)); s != "" {
 			f.Value.Set(s)
 		}
 	})
 	flag.Parse()
+	if hostName == "" {
+		if h, err := os.Hostname(); err == nil {
+			hostName = h
+		} else {
+			hostName = "localhost"
+		}
+	}
 }
 
 type logWriter struct {

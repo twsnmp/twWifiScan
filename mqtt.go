@@ -13,6 +13,7 @@ var mqttCh = make(chan interface{}, 2000)
 
 type mqttApInfoDataEnt struct {
 	Time      string `json:"time"`
+	Host      string `json:"host"`
 	SSID      string `json:"ssid"`
 	BSSID     string `json:"bssid"`
 	RSSI      string `json:"rssi"`
@@ -27,6 +28,7 @@ type mqttApInfoDataEnt struct {
 
 type mqttWifiScanStatsDataEnt struct {
 	Time      string  `json:"time"`
+	Host      string  `json:"host"`
 	Total     int     `json:"total"`
 	Count     int     `json:"count"`
 	PS        float64 `json:"ps"`
@@ -35,6 +37,7 @@ type mqttWifiScanStatsDataEnt struct {
 
 type mqttMonitorDataEnt struct {
 	Time    string  `json:"time"`
+	Host    string  `json:"host"`
 	CPU     float64 `json:"cpu"`
 	Memory  float64 `json:"memory"`
 	Load    float64 `json:"load"`
@@ -93,13 +96,13 @@ func startMQTT(ctx context.Context) {
 
 func getMqttTopic(msg interface{}) string {
 	r := mqttTopic
-	switch msg.(type) {
+	switch m := msg.(type) {
 	case *mqttApInfoDataEnt:
-		r += "/APInfo"
+		r += "/APInfo/" + m.BSSID
 	case *mqttWifiScanStatsDataEnt:
-		r += "/WifiScanStats"
+		r += "/WifiScanStats/" + hostName
 	case *mqttMonitorDataEnt:
-		r += "/Monitor"
+		r += "/Monitor/" + hostName
 	default:
 		log.Printf("getMqttTopic: unknown msg type %T", msg)
 	}

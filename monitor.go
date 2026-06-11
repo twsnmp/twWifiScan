@@ -70,6 +70,7 @@ func sendMonitor() {
 	syslogCh <- msg
 	publishMQTT(&mqttMonitorDataEnt{
 		Time:    time.Now().Format(time.RFC3339),
+		Host:    hostName,
 		CPU:     cpus[0],
 		Memory:  mems.UsedPercent,
 		Load:    loads.Load1,

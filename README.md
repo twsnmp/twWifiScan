@@ -59,6 +59,8 @@ $ make zip
 Usage of dist/twWifiScan:
   -debug
     	Enable debug mode
+  -host string
+    	Host name for identification
   -iface string
     	Monitor interface (default "wlan0")
   -interval int
@@ -103,9 +105,9 @@ type=APInfo,ssid=F660T-VFyM-X,bssid=FC:C8:97:B0:xx:D5,rssi=-73,Channel=1,info=En
 
 ### MQTT
 Messages are published in JSON format to topics based on the `mqttTopic` prefix:
-- `<mqttTopic>/APInfo`
-- `<mqttTopic>/WifiScanStats`
-- `<mqttTopic>/Monitor`
+- `<mqttTopic>/APInfo/<bssid>`
+- `<mqttTopic>/WifiScanStats/<hostName>`
+- `<mqttTopic>/Monitor/<hostName>`
 
 ## License
 
