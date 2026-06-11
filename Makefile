@@ -14,7 +14,7 @@ ZIP          = zip
 ### ターゲットパラメータ
 DIST = dist
 SRC = ./main.go ./syslog.go ./monitor.go ./wifiScan.go ./vendor.go
-TARGETS     = $(DIST)/twWifiScan.exe $(DIST)/twWifiScan $(DIST)/twWifiScan.arm $(DIST)/twWifiScan.arm64
+TARGETS     = $(DIST)/twWifiScan.exe $(DIST)/twWifiScan $(DIST)/twWifiScan.arm $(DIST)/twWifiScan.arm64 $(DIST)/twWifiScan_darwin
 GO_PKGROOT  = ./...
 
 ### PHONY ターゲットのビルドルール
@@ -28,6 +28,7 @@ zip: $(TARGETS)
 	cd dist && $(ZIP) twWifiScan_linux_amd64.zip twWifiScan
 	cd dist && $(ZIP) twWifiScan_linux_arm.zip twWifiScan.arm
 	cd dist && $(ZIP) twWifiScan_linux_arm64.zip twWifiScan.arm64
+	cd dist && $(ZIP) twWifiScan_darwin_arm64.zip twWifiScan_darwin
 
 ### 実行ファイルのビルドルール
 $(DIST)/twWifiScan.exe: $(SRC) ./wifiCmd_windows.go
@@ -38,4 +39,6 @@ $(DIST)/twWifiScan.arm64: $(SRC) ./wifiCmd_linux.go
 	env GO111MODULE=on GOOS=linux GOARCH=arm64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 $(DIST)/twWifiScan: $(SRC) ./wifiCmd_linux.go
 	env GO111MODULE=on GOOS=linux GOARCH=amd64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
+$(DIST)/twWifiScan_darwin: $(SRC) ./wifiCmd_darwin.go
+	env GO111MODULE=on GOOS=darwin GOARCH=arm64 $(GO_BUILD) $(GO_LDFLAGS) -o $@
 
