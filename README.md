@@ -25,7 +25,8 @@ In the current version, the following information can be obtained:
 - v1.0.0 released (2021/9/8): Initial release with basic functions.
 - v1.0.1 released (2021/10/31): macOS bug fix.
 - v1.1.0 released (2025/1/26): Automatic release.
-- v2.0.0 (Current): Integrated MQTT support and removed macOS dependencies.
+- v2.0.0 released: Integrated MQTT support and removed macOS dependencies.
+- v3.0.0 (Current): Restored macOS Wi-Fi scanning support using CoreWLAN (macwifi) and aligned MQTT implementation with twBlueScan.
 
 ## Build
 
