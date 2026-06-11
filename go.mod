@@ -4,6 +4,7 @@ go 1.26.1
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.5.1
+	github.com/jaisonerick/macwifi v1.0.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	golang.org/x/text v0.29.0
 )
@@ -11,7 +12,6 @@ require (
 require (
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
-	github.com/jaisonerick/macwifi v1.0.0 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.14 // indirect
 	github.com/tklauser/numcpus v0.9.0 // indirect
